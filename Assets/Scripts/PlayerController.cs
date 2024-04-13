@@ -1,22 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
 	[SerializeField, Range(1f, 5f)]
 	private float _speed;
-	
+
+	private Rigidbody2D _body;
+
+	private Vector2 _direction;
+
+	void Awake()
+	{
+		_body = GetComponent<Rigidbody2D>();
+	}
+
 	void Update()
 	{
-		Vector3 movement = Vector3.zero;
+		_direction = Vector3.zero;
 
-		movement.x = Input.GetAxis("Horizontal");
-		movement.y = Input.GetAxis("Vertical");
+		_direction.x = Input.GetAxisRaw("Horizontal");
+		_direction.y = Input.GetAxisRaw("Vertical");
 
-		movement.Normalize();
+		_direction.Normalize();
+	}
 
-		transform.position += movement * _speed * Time.deltaTime;
+	void FixedUpdate()
+	{
+		_body.velocity = _direction * _speed;
 	}
 }
