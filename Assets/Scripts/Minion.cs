@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.Rendering;
 
 public class Minion : RegisteredEnabledBehaviour<Minion>
@@ -39,9 +41,13 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 
 	void FixedUpdate()
 	{
+		Profiler.BeginSample("Separation");
 		_body.AddForce(Separation());
+		Profiler.EndSample();
 
+		Profiler.BeginSample("Attack Villager");
 		AttackVillager();
+		Profiler.EndSample();
 
 		if (_currentTarget == null)
 		{
@@ -69,8 +75,8 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 
 	void AttackVillager()
 	{
-		float attackDistance = 12f;
-		float disengageDistance = 16f;
+		float attackDistance = 10f;
+		float disengageDistance = 15f;
 
 		if (_currentTarget != null)
 		{
@@ -83,7 +89,7 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 			}
 			else
 			{
-				_body.AddForce(diff * 5f);
+				_body.AddForce(diff * 25f);
 				return;
 			}
 		}
@@ -120,12 +126,17 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 
 		var allMinions = Minion.instances;
 
+		int maxCount = 20;
+		int totalCount = 0;
+
 		int count = 0;
 		float separationRange = 1f;
 
 		foreach (var other in allMinions)
 		{
+			if (totalCount >= maxCount) break;
 			if (other == this) continue;
+			totalCount++;
 
 			Vector2 diff = this.transform.position - other.transform.position;
 			if(diff.sqrMagnitude > 0 && diff.sqrMagnitude < (separationRange*separationRange))

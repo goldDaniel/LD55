@@ -30,44 +30,10 @@ public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 			return;
 		}
 
-		if(!AttractTo(PlayerController.instance.transform.position, 6f))
-		{
-			foreach (var minion in Minion.instances)
-			{
-				if(AttractTo(minion.transform.position, 3f))
-				{
-					break;
-				}
-			}
-		}
+		AttractTo(PlayerController.instance.transform.position, 6f);
 
-		_body.AddForce(Separation());
-	}
-
-	Vector2 Separation()
-	{
-		Vector2 result = new Vector2();
-
-		var allBlood = BloodDroplet.instances;
-
-		int count = 0;
-		float separationRange = 0.5f;
-
-		foreach (var other in allBlood)
-		{
-			if (other == this) continue;
-
-			Vector2 diff = this.transform.position - other.transform.position;
-			if (diff.sqrMagnitude > 0 && diff.sqrMagnitude < (separationRange * separationRange))
-			{
-				result += diff * 2;
-				count++;
-			}
-		}
-
-		if (count > 0) result /= count;
-
-		return result;
+		var force = Random.insideUnitCircle * Random.Range(0.5f, 1.5f);
+		_body.AddForce(force);
 	}
 
 	bool AttractTo(Vector3 attractPosition, float attractionRange)
