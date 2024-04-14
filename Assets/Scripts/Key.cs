@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Key : MonoBehaviour
@@ -10,6 +11,14 @@ public class Key : MonoBehaviour
 
 	private bool paid = false;
 
+	TextMeshPro worldSpaceUI;
+
+	void Start()
+	{
+		worldSpaceUI = GetComponentInChildren<TextMeshPro>();
+		worldSpaceUI.text = $"Required Blood: {cost}";
+	}
+
 	void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (paid) return;
@@ -21,6 +30,7 @@ public class Key : MonoBehaviour
 				door.Unlock();
 				PlayerInventory.instance.bloodCount -= cost;
 				paid = true;
+				worldSpaceUI.text = "Blood price paid";
 			}
 		}
 	}
