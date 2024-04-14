@@ -32,13 +32,16 @@ public class AudioSystem : MonoSingleton<AudioSystem>
 
 		_loopAudioSource.clip = loop;
 		_loopAudioSource.loop = true;
-		loop.LoadAudioData();
+		_loopAudioSource.volume = 0;
+		_loopAudioSource.Pause();
+		_loopAudioSource.Play();
 
 		while (_introAudioSource.isPlaying)
 		{
 			yield return null;
 		}
 
-		_loopAudioSource.Play();
+		_loopAudioSource.volume = 100;
+		_loopAudioSource.UnPause();
 	}
 }
