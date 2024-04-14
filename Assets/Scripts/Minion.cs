@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Minion : RegisteredEnabledBehaviour<Minion>
 {
@@ -6,7 +7,8 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 	private SpriteRenderer _sr;
 	private GameObject _player;
 
-	private GameObject _currentTarget = null;
+	private float targetTimer = 3f;
+	private Villager _currentTarget = null;
 
 	void Start()
 	{
@@ -18,6 +20,21 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 	void Update()
 	{
 		_sr.flipX = _body.velocity.x < 0;
+
+		if (_currentTarget == null)
+		{
+			targetTimer = 3f;
+		}
+		else 
+		{
+			targetTimer -= Time.deltaTime;
+			if(targetTimer <= 0)
+			{
+				_currentTarget.isTargeted = false;
+				_currentTarget = null;
+			}
+		}
+
 	}
 
 	void FixedUpdate()
@@ -25,7 +42,11 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 		_body.AddForce(Separation());
 
 		AttackVillager();
-		FollowPlayer();
+
+		if (_currentTarget == null)
+		{
+			FollowPlayer();
+		}
 	}
 
 	void FollowPlayer()
@@ -37,20 +58,27 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 			float speed = toPlayer.magnitude * 3f;
 			_body.AddForce(toPlayer.normalized * speed);
 		}
+		else 
+		{
+			if(_currentTarget == null)
+			{
+				_body.velocity /= 1.15f;
+			}
+		}
 	}
 
 	void AttackVillager()
 	{
-		float attackDistance = 5f;
-		float disengageDistance = 10f;
+		float attackDistance = 12f;
+		float disengageDistance = 16f;
 
 		if (_currentTarget != null)
 		{
 			Vector2 diff = _currentTarget.transform.position - _player.transform.position;
 
-
 			if (diff.sqrMagnitude >= disengageDistance * disengageDistance)
 			{
+				_currentTarget.isTargeted = false;
 				_currentTarget = null;
 			}
 			else
@@ -63,12 +91,15 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 		foreach (var villager in Villager.instances)
 		{
 			Vector2 diff = villager.transform.position - _player.transform.position;
-
-			if(diff.sqrMagnitude < attackDistance*attackDistance)
+			if (!villager.isTargeted)
 			{
-				_currentTarget = villager.gameObject;
-				_body.AddForce(diff * 5f);
-				return;
+				if (diff.sqrMagnitude < attackDistance * attackDistance)
+				{
+					villager.isTargeted = true;
+					_currentTarget = villager;
+					_body.AddForce(diff * 5f);
+					return;
+				}
 			}
 		}
 	}

@@ -11,6 +11,8 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 	[SerializeField]
 	private GameObject _blood;
 
+	public bool isTargeted = false;
+
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag("Player"))
@@ -21,6 +23,7 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 
 	public void Die()
 	{
+		isTargeted = false;
 		SpawnBloodParticles();
 		for (int i = 0; i < _deathTexturePrefabs.Length; i++)
 		{
@@ -32,7 +35,7 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 
 	void SpawnBloodParticles()
 	{
-		int bloodDroplet = Random.Range(4, 10);
+		int bloodDroplet = UnityEngine.Random.Range(4, 10);
 
 		for (int i = 0; i < bloodDroplet; ++i)
 		{

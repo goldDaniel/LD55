@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 {
+	[SerializeField]
+	private AudioClip[] pickEffects;
+
 	private Rigidbody2D _body;
 
 	private float collectionTimer = 0.75f;
@@ -91,7 +94,20 @@ public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 		if (other.CompareTag("Player"))
 		{
 			PlayerInventory.instance.bloodCount++;
+			PlayPickupSound();
 			Destroy(this.gameObject);
 		}
+	}
+
+	void PlayPickupSound()
+	{
+		int index = Random.Range(0, pickEffects.Length);
+		float volume = 0.5f;
+		if(index == 4)
+		{
+			volume = 0.2f;
+		}
+
+		AudioSystem.instance.audioSource.PlayOneShot(pickEffects[index], volume);
 	}
 }
