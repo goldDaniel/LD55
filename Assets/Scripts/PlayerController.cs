@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoSingleton<PlayerController>
 {
 	[SerializeField, Range(1f, 5f)]
 	private float _speed;

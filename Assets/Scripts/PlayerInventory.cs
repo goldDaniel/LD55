@@ -1,19 +1,20 @@
 using TMPro;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : MonoSingleton<PlayerInventory>
 {
-
 	[SerializeField]
 	private TextMeshProUGUI textArea;
 
 	public int bloodCount;
 
-	public int bloodGoal;
-
-
 	void Update()
 	{
-		textArea.text = $"Blood: {bloodCount} / {bloodGoal}";
+		textArea.text = $"Blood Count: {bloodCount}";
+	}
+
+	public bool HasEnoughBlood(int goal)
+	{
+		return bloodCount >= goal;
 	}
 }
