@@ -1,7 +1,4 @@
-using System;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 {
@@ -30,11 +27,11 @@ public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 			return;
 		}
 
-		if(!AttractTo(PlayerController.instance.transform.position))
+		if(!AttractTo(PlayerController.instance.transform.position, 6f))
 		{
 			foreach (var minion in Minion.instances)
 			{
-				if(AttractTo(minion.transform.position))
+				if(AttractTo(minion.transform.position, 3f))
 				{
 					break;
 				}
@@ -70,9 +67,8 @@ public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 		return result;
 	}
 
-	bool AttractTo(Vector3 attractPosition)
+	bool AttractTo(Vector3 attractPosition, float attractionRange)
 	{
-		float attractionRange = 3f;
 		float dist = Vector3.Distance(attractPosition, transform.position);
 
 		if (dist < attractionRange)
