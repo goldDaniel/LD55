@@ -1,11 +1,17 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoSingleton<PlayerController>
 {
-	[SerializeField, Range(1f, 5f)]
+	[SerializeField, Range(5f, 15f)]
 	private float _speed;
 
+	[SerializeField, Range(1, 100)]
+	private int _minionCost;
+
+	[SerializeField]
+	Minion minionPrefab;
+
+	private SpriteRenderer _sr;
 	private Rigidbody2D _body;
 
 	private Vector2 _direction;
@@ -13,6 +19,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 	void Awake()
 	{
 		_body = GetComponent<Rigidbody2D>();
+		_sr = GetComponent<SpriteRenderer>();
 	}
 
 	void Update()
@@ -23,10 +30,29 @@ public class PlayerController : MonoSingleton<PlayerController>
 		_direction.y = Input.GetAxisRaw("Vertical");
 
 		_direction.Normalize();
+
+
+
+		if (Input.GetKeyDown(KeyCode.Q))
+		{
+			if (PlayerInventory.instance.bloodCount >= _minionCost)
+			{
+				PlayerInventory.instance.bloodCount -= _minionCost;
+				SpawnMinion();
+			}
+		}
+
+		_sr.flipX = _body.velocity.x < 0;
 	}
 
 	void FixedUpdate()
 	{
 		_body.velocity = _direction * _speed;
+	}
+
+	void SpawnMinion()
+	{
+		var spawnPos = new Vector2(this.transform.position.x, this.transform.position.y) + Random.insideUnitCircle * Random.Range(1.5f, 2.5f);
+		Instantiate(minionPrefab, spawnPos, Quaternion.identity);
 	}
 }

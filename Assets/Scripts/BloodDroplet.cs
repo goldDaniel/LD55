@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class BloodDroplet : MonoBehaviour
+public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 {
 	private Rigidbody2D _body;
 
@@ -24,24 +22,66 @@ public class BloodDroplet : MonoBehaviour
 	void FixedUpdate()
 	{
 		_body.velocity /= 1.05f;
-		if (collectionTimer > 0) 
+		if (collectionTimer > 0)
 		{
 			return;
 		}
 
-		float attractionRange = 3f;
+		if(!AttractTo(PlayerController.instance.transform.position, 6f))
+		{
+			foreach (var minion in Minion.instances)
+			{
+				if(AttractTo(minion.transform.position, 3f))
+				{
+					break;
+				}
+			}
+		}
 
-		Vector3 playerPos = PlayerController.instance.transform.position;
-		float dist = Vector3.Distance(playerPos, transform.position);
+		_body.AddForce(Separation());
+	}
+
+	Vector2 Separation()
+	{
+		Vector2 result = new Vector2();
+
+		var allBlood = BloodDroplet.instances;
+
+		int count = 0;
+		float separationRange = 0.5f;
+
+		foreach (var other in allBlood)
+		{
+			if (other == this) continue;
+
+			Vector2 diff = this.transform.position - other.transform.position;
+			if (diff.sqrMagnitude > 0 && diff.sqrMagnitude < (separationRange * separationRange))
+			{
+				result += diff * 2;
+				count++;
+			}
+		}
+
+		if (count > 0) result /= count;
+
+		return result;
+	}
+
+	bool AttractTo(Vector3 attractPosition, float attractionRange)
+	{
+		float dist = Vector3.Distance(attractPosition, transform.position);
 
 		if (dist < attractionRange)
 		{
-			Vector3 dir = playerPos - transform.position;
+			Vector3 dir = attractPosition - transform.position;
 			dir.Normalize();
 
 			float t = dist / attractionRange;
 			_body.velocity += new Vector2(dir.x, dir.y) * t * 2f;
+			return true;
 		}
+
+		return false;
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

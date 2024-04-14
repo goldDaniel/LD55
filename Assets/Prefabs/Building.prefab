@@ -220,4 +220,4 @@ MonoBehaviour:
   toSpawn: {fileID: 808167357176700974, guid: 79f36f52c2e5cca4e909c3d6e12a12ed, type: 3}
   width: 0.2
   height: 0.2
-  spawnTimer: 0.5
+  spawnTimer: 1.5

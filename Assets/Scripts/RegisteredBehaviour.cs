@@ -5,7 +5,7 @@ public class RegisteredEnabledBehaviour<T> : MonoBehaviour where T : RegisteredE
 {
 	private static readonly List<T> _instances = new();
 
-	public static IReadOnlyList<T> instance => _instances;
+	public static IReadOnlyList<T> instances => _instances;
 
 	protected virtual void OnEnable()
 	{
