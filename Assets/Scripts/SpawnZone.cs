@@ -6,13 +6,15 @@ public class SpawnZone : MonoBehaviour
 	[SerializeField]
 	GameObject toSpawn;
 
-	[SerializeField, Min(1)]
+	[SerializeField]
 	float width, height;
 
 	[SerializeField]
 	float spawnTimer;
 
 	float _spawnTime;
+
+	private Vector2 spawnBounds => new Vector2(width * transform.parent.localScale.x, height * transform.parent.localScale.y);
 
 	void Start()
 	{
@@ -25,7 +27,7 @@ public class SpawnZone : MonoBehaviour
 		_spawnTime -= Time.deltaTime;
 		if(_spawnTime <= 0)
 		{
-			Vector2 pos = new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle * new Vector2(width, height);
+			Vector2 pos = new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle * spawnBounds;
 			var go = Instantiate(toSpawn, pos, Quaternion.identity);
 
 			go.GetComponentInChildren<Rigidbody2D>().velocity = Random.insideUnitCircle * 2f;
@@ -39,7 +41,7 @@ public class SpawnZone : MonoBehaviour
 		var color = Gizmos.color;
 		Gizmos.color = Color.yellow;
 
-		Gizmos.DrawWireCube(transform.position, new Vector3(width, height, 0));
+		Gizmos.DrawWireCube(transform.position, new Vector3(spawnBounds.x, spawnBounds.y, 0));
 
 		Gizmos.color = color;
 	}
