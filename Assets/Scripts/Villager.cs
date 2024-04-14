@@ -11,6 +11,10 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 	[SerializeField]
 	private GameObject _blood;
 
+	[SerializeField]
+	private AudioClip[] _deathSounds;
+
+	[System.NonSerialized]
 	public bool isTargeted = false;
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -25,6 +29,7 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 	{
 		isTargeted = false;
 		SpawnBloodParticles();
+		PlayDeathSound();
 		for (int i = 0; i < _deathTexturePrefabs.Length; i++)
 		{
 			GameObject bodyPart = Instantiate(_deathTexturePrefabs[i], transform.position, Quaternion.identity);
@@ -42,5 +47,13 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 			GameObject obj = Instantiate(_blood, transform.position, Quaternion.identity);
 			obj.GetComponent<Rigidbody2D>().velocity = Random.insideUnitSphere * Random.Range(5, 12);
 		}
+	}
+
+	void PlayDeathSound()
+    {
+		int index = Random.Range(0, _deathSounds.Length);
+		float volume = 0.5f;
+
+		AudioSystem.instance.audioSource.PlayOneShot(_deathSounds[index], volume);
 	}
 }

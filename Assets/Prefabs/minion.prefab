@@ -100,6 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1773992d66b870947a578b9e56da9af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnSounds:
+  - {fileID: 8300000, guid: 11845ab9de3236d4691c67b6e6d7145d, type: 3}
+  - {fileID: 8300000, guid: bf17dbd29835960489b1a4de9b8402be, type: 3}
+  - {fileID: 8300000, guid: 4677813095ebd834d942d0a38f8ad5e2, type: 3}
+  - {fileID: 8300000, guid: de7f0daa3ab06784a96ffe0420e6abca, type: 3}
 --- !u!58 &-7416086864267641223
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,11 +12,15 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 	private float targetTimer = 3f;
 	private Villager _currentTarget = null;
 
+	[SerializeField]
+	private AudioClip[] _spawnSounds;
+
 	void Start()
 	{
 		_body = GetComponent<Rigidbody2D>();
 		_player = PlayerController.instance.gameObject;
 		_sr = GetComponent<SpriteRenderer>();
+		PlaySpawnSound();
 	}
 
 	void Update()
@@ -149,5 +153,13 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 		if (count > 0) result /= count;
 
 		return result;
+	}
+
+	void PlaySpawnSound()
+	{
+		int index = Random.Range(0, _spawnSounds.Length);
+		float volume = 0.5f;
+
+		AudioSystem.instance.audioSource.PlayOneShot(_spawnSounds[index], volume);
 	}
 }
