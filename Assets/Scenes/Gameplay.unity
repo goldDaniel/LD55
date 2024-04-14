@@ -521,6 +521,10 @@ PrefabInstance:
       propertyPath: textArea
       value: 
       objectReference: {fileID: 968513906}
+    - target: {fileID: 5062471957140868025, guid: 363b3ac4c88d1ed41a6b275b1411e6da, type: 3}
+      propertyPath: bloodCount
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 6716007930506258108, guid: 363b3ac4c88d1ed41a6b275b1411e6da, type: 3}
       propertyPath: m_Name
       value: Necromancer

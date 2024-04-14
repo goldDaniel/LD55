@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AIController : MonoBehaviour
+public class Villager : RegisteredEnabledBehaviour<Villager>
 {
 	[SerializeField]
 	private GameObject[] _deathTexturePrefabs;
@@ -15,13 +15,13 @@ public class AIController : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			SpawnBloodParticles();
 			Die();
 		}
 	}
 
-	void Die()
+	public void Die()
 	{
+		SpawnBloodParticles();
 		for (int i = 0; i < _deathTexturePrefabs.Length; i++)
 		{
 			GameObject bodyPart = Instantiate(_deathTexturePrefabs[i], transform.position, Quaternion.identity);
