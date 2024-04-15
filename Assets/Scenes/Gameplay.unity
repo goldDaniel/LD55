@@ -2013,6 +2013,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2159091642355560257, guid: ca10aa9353344404696f0262aef617a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159091642355560257, guid: ca10aa9353344404696f0262aef617a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5144729242860180032, guid: ca10aa9353344404696f0262aef617a0, type: 3}
       propertyPath: cost
       value: 10
