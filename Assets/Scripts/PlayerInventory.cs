@@ -12,6 +12,7 @@ public class PlayerInventory : MonoSingleton<PlayerInventory>
 	{
 		{CollectableType.Blood, 10 },
 		{CollectableType.Flesh, 0 },
+		{CollectableType.Soul, 0 },
 	};
 
 	void Update()

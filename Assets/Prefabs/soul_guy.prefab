@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7543990127023073419}
   - component: {fileID: 3610371696215705737}
   m_Layer: 0
-  m_Name: flesh_guy
+  m_Name: soul_guy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,12 +110,16 @@ MonoBehaviour:
       dictItems:
       - key: {fileID: 4832977510849905247, guid: 41b509eba946a6046b6619085af4add3, type: 3}
         value:
-          amountRange: {x: 4, y: 12}
+          amountRange: {x: 40, y: 50}
           probability: 1
       - key: {fileID: 3955105882136951170, guid: 7274d4ef8ef5eb142ac034307306753a, type: 3}
         value:
-          amountRange: {x: 1, y: 2}
-          probability: 0.9
+          amountRange: {x: 20, y: 30}
+          probability: 1
+      - key: {fileID: 6423111271052209182, guid: 5ef0ba7973f9dbd4bb616fcd84e94f52, type: 3}
+        value:
+          amountRange: {x: 10, y: 15}
+          probability: 1
   _deathSounds:
   - {fileID: 8300000, guid: 6118a3c41ea61b8408ac6652bf888a18, type: 3}
   - {fileID: 8300000, guid: 94a44701218cde84da338579e6f5bb2b, type: 3}

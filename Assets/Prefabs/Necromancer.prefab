@@ -269,6 +269,8 @@ MonoBehaviour:
         value: {fileID: 0}
       - key: 1
         value: {fileID: 0}
+      - key: 2
+        value: {fileID: 0}
 --- !u!58 &-6091820955576190945
 CircleCollider2D:
   m_ObjectHideFlags: 0
