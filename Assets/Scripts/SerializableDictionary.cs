@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using UnityEngine;
 namespace Assets.Scripts
 {
     [Serializable]
-    public class SerializableDictionary<K, V>
+    public class SerializableDictionary<K, V>: IEnumerable
     {
         [Serializable]
         private class DictItem
@@ -42,5 +43,10 @@ namespace Assets.Scripts
         private Dict _serialDict;
 
         public Dictionary<K, V> dictionary => _serialDict.ToDictionary();
+
+        public IEnumerator GetEnumerator()
+        {
+            return (IEnumerator)dictionary;
+        }
     }
 }

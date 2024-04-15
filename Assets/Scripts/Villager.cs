@@ -1,7 +1,17 @@
+using Assets.Scripts;
 using UnityEngine;
 
 public class Villager : RegisteredEnabledBehaviour<Villager>
 {
+	[System.Serializable]
+	private struct DropData
+    {
+		[SerializeField]
+		public Vector2Int amountRange;
+		[SerializeField]
+		public float probability;
+    }
+
 	[SerializeField]
 	private GameObject[] _deathTexturePrefabs;
 
@@ -9,10 +19,7 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 	private float _explosionSize = 2f;
 
 	[SerializeField]
-	private GameObject _blood;
-
-	[SerializeField]
-	private GameObject _flesh;
+	private SerializableDictionary<GameObject, DropData> _drops = new SerializableDictionary<GameObject, DropData>();
 
 	[SerializeField]
 	private AudioClip[] _deathSounds;
@@ -31,8 +38,13 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 	public void Die()
 	{
 		isTargeted = false;
-		Spawn(_blood, Random.Range(4, 10), 1);
-		Spawn(_flesh, 1, 0.2f);
+		foreach (var entry in _drops.dictionary)
+        {
+			GameObject prefab = entry.Key;
+			DropData data = (DropData)entry.Value;
+			int amount = Random.Range(data.amountRange.x, data.amountRange.y);
+			Spawn(prefab, amount, data.probability);
+        }
 		PlayDeathSound();
 		for (int i = 0; i < _deathTexturePrefabs.Length; i++)
 		{

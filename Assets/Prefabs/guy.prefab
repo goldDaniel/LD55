@@ -105,8 +105,17 @@ MonoBehaviour:
   - {fileID: 3611409730364218545, guid: ec689dd8ccfead047b154bf900f22e64, type: 3}
   - {fileID: 4727831426908219573, guid: bd334c2509dc311448677826f6155344, type: 3}
   _explosionSize: 2
-  _blood: {fileID: 4832977510849905247, guid: 41b509eba946a6046b6619085af4add3, type: 3}
-  _flesh: {fileID: 3955105882136951170, guid: 7274d4ef8ef5eb142ac034307306753a, type: 3}
+  _drops:
+    _serialDict:
+      dictItems:
+      - key: {fileID: 4832977510849905247, guid: 41b509eba946a6046b6619085af4add3, type: 3}
+        value:
+          amountRange: {x: 4, y: 12}
+          probability: 1
+      - key: {fileID: 3955105882136951170, guid: 7274d4ef8ef5eb142ac034307306753a, type: 3}
+        value:
+          amountRange: {x: 1, y: 1}
+          probability: 0.2
   _deathSounds:
   - {fileID: 8300000, guid: 6118a3c41ea61b8408ac6652bf888a18, type: 3}
   - {fileID: 8300000, guid: 94a44701218cde84da338579e6f5bb2b, type: 3}

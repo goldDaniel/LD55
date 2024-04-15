@@ -71,7 +71,12 @@ public class Collectable : RegisteredEnabledBehaviour<Collectable>
 		}
 	}
 
-	void PlaySpawnSound()
+    private void OnTriggerStay2D(Collider2D other)
+    {
+		OnTriggerEnter2D(other);
+    }
+
+    void PlaySpawnSound()
     {
 		if (_spawnEffects.Length == 0) return;
 
