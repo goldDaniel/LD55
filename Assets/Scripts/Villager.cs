@@ -54,8 +54,8 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 		}
 		normal.Normalize();
 
-		_body.velocity = -_body.velocity;
-		_body.position += normal * this.transform.localScale.x / 2f;
+		_body.velocity = -_body.velocity * 4;
+		_body.position += normal * this.transform.localScale.x / 4f;
 	}
 
 	void OnCollisionStay2D(Collision2D collision)
@@ -74,7 +74,7 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 			_body.AddForce(dir * 2f);
 		}
 
-		if (Random.value > 0.25)
+		if (Random.value > 0.1)
 		{
 			_body.AddForce(Random.insideUnitCircle * Random.Range(5f, 12f));
 		}
