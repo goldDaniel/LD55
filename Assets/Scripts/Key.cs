@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using TMPro;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ public class Key : MonoBehaviour
 			if(PlayerInventory.instance.HasEnoughBlood(cost))
 			{
 				door.Unlock();
-				PlayerInventory.instance.bloodCount -= cost;
+				PlayerInventory.instance.inventory[CollectableType.Blood] -= cost;
 				paid = true;
 				worldSpaceUI.text = "Blood price paid";
 			}

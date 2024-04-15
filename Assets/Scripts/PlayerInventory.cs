@@ -1,20 +1,39 @@
+using Assets.Scripts;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class PlayerInventory : MonoSingleton<PlayerInventory>
 {
 	[SerializeField]
-	private TextMeshProUGUI textArea;
+	private SerializableDictionary<CollectableType, TextMeshProUGUI> _textArea = new SerializableDictionary<CollectableType, TextMeshProUGUI>();
 
-	public int bloodCount;
+    public Dictionary<CollectableType, int> inventory = new Dictionary<CollectableType, int>();
 
-	void Update()
+    private void Start()
+    {
+		foreach (CollectableType type in System.Enum.GetValues(typeof(CollectableType)))
+        {
+			int count = 0;
+			if (type == CollectableType.Blood) count = 10;
+
+			inventory.Add(type, count);
+        }
+    }
+
+    void Update()
 	{
-		textArea.text = $"Blood Count: {bloodCount}";
+		foreach (var entry in inventory)
+        {
+			var key = entry.Key;
+			string text = _textArea.dictionary[key].text;
+			string desc = text.Substring(0, text.IndexOf(" "));
+			_textArea.dictionary[key].text = $"{desc} {inventory[key]}";
+        }
 	}
 
 	public bool HasEnoughBlood(int goal)
 	{
-		return bloodCount >= goal;
+		return inventory[CollectableType.Blood] >= goal;
 	}
 }
