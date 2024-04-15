@@ -99,8 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5060e1f4adf0ae4daa82eb6758f5886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pickEffects: []
-  _spawnEffects: []
+  _pickEffects:
+  - {fileID: 8300000, guid: 6206ff4935bfab74c9452c9d3ac464ab, type: 3}
+  _spawnEffects:
+  - {fileID: 8300000, guid: cf08e32dd53211444a0985638422ca7c, type: 3}
   _type: 2
 --- !u!50 &4074555727036330448
 Rigidbody2D:
