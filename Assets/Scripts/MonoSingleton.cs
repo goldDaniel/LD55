@@ -11,7 +11,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
 		{
 			if(_instance == null)
 			{
-				_instance = (T)Resources.FindObjectsOfTypeAll(typeof(T)).FirstOrDefault();
+				_instance = (T)Object.FindObjectOfType(typeof(T));
 				_instance ??= new GameObject(typeof(MonoSingleton<T>).ToString(), typeof(T)).GetComponent<T>();
 				if(Application.isPlaying)
 				{
