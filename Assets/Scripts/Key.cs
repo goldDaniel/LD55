@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
+	[System.Serializable]
+	private class Payment
+    {
+		[SerializeField]
+		public CollectableType type;
+		[SerializeField]
+		public int cost;
+    }
+
 	[SerializeField]
 	Door door;
 
 	[SerializeField]
-	int cost;
+	Payment[] payment;
 
 	private bool paid = false;
 
@@ -17,7 +26,15 @@ public class Key : MonoBehaviour
 	void Start()
 	{
 		worldSpaceUI = GetComponentInChildren<TextMeshPro>();
-		worldSpaceUI.text = $"Required Blood: {cost}";
+		string text = "Required payment: ";
+		foreach (var pay in payment)
+        {
+			string payName = pay.type.ToString();
+			string payText = $"{payName} {pay.cost} ";
+			text += payText;
+        }
+
+		worldSpaceUI.text = text;
 	}
 
 	void OnTriggerEnter2D(Collider2D collision)
@@ -26,12 +43,22 @@ public class Key : MonoBehaviour
 		
 		if(collision.CompareTag("Player"))
 		{
-			if(PlayerInventory.instance.HasEnoughBlood(cost))
+			bool costReached = true;
+			foreach (var pay in payment)
+			{
+				costReached &= PlayerInventory.instance.HasEnough(pay.type, pay.cost);
+			}
+
+			if(costReached)
 			{
 				door.Unlock();
-				PlayerInventory.instance.inventory[CollectableType.Blood] -= cost;
+				foreach (var pay in payment)
+				{
+					PlayerInventory.instance.inventory[pay.type] -= pay.cost;
+				}
+
 				paid = true;
-				worldSpaceUI.text = "Blood price paid";
+				worldSpaceUI.text = "Ritual Completed";
 			}
 		}
 	}

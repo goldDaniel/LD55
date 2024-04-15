@@ -32,8 +32,8 @@ public class PlayerInventory : MonoSingleton<PlayerInventory>
         }
 	}
 
-	public bool HasEnoughBlood(int goal)
+	public bool HasEnough(CollectableType type, int goal)
 	{
-		return inventory[CollectableType.Blood] >= goal;
+		return inventory[type] >= goal;
 	}
 }
