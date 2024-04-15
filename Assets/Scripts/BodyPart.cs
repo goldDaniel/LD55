@@ -8,6 +8,8 @@ public class BodyPart : MonoBehaviour
 	void Start()
 	{
 		_sr = GetComponent<SpriteRenderer>();
+		GetComponent<Rigidbody2D>().angularVelocity = Random.Range(-360f, 360f);
+
 		StartCoroutine(FadeOut());
 	}
 
@@ -16,7 +18,7 @@ public class BodyPart : MonoBehaviour
 		while (_sr.color.a > 0)
 		{
 			Color c = _sr.color;
-			c.a -= Time.deltaTime;
+			c.a -= Time.deltaTime * 0.10f;
 			_sr.color = c;
 
 			yield return null;

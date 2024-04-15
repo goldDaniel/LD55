@@ -30,7 +30,7 @@ public class SpawnZone : MonoBehaviour
 			Vector2 pos = new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle * spawnBounds;
 			var go = Instantiate(toSpawn, pos, Quaternion.identity);
 
-			go.GetComponentInChildren<Rigidbody2D>().velocity = Random.insideUnitCircle * 2f;
+			go.GetComponentInChildren<Rigidbody2D>().velocity = Random.insideUnitCircle * 5f;
 
 			_spawnTime = spawnTimer;
 		}

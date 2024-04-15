@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Profiling;
-using UnityEngine.Rendering;
 
 public class Minion : RegisteredEnabledBehaviour<Minion>
 {
@@ -10,8 +7,10 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 	private SpriteRenderer _sr;
 	private GameObject _player;
 
-	private float targetTimer = 3f;
+	private float targetTimer = 1.5f;
 	private Villager _currentTarget = null;
+
+	private bool _canTargetEnemy = false;
 
 	[SerializeField]
 	private AudioClip[] _spawnSounds;
@@ -42,7 +41,7 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 
 		if (_currentTarget == null)
 		{
-			targetTimer = 3f;
+			targetTimer = 1.5f;
 		}
 		else 
 		{
@@ -51,6 +50,7 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 			{
 				_currentTarget.isTargeted = false;
 				_currentTarget = null;
+				_canTargetEnemy = false;
 			}
 		}
 
@@ -62,31 +62,32 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 		_body.AddForce(Separation());
 		Profiler.EndSample();
 
-		Profiler.BeginSample("Attack Villager");
-		AttackVillager();
-		Profiler.EndSample();
-
-		if (_currentTarget == null)
+		if(_currentTarget == null)
 		{
 			FollowPlayer();
+			
 		}
+		
+		if(_canTargetEnemy)
+		{
+			AttackVillager();
+		}
+
+		_body.velocity = Vector2.ClampMagnitude(_body.velocity, 10f);
 	}
 
 	void FollowPlayer()
 	{
 		Vector2 toPlayer = _player.transform.position - this.transform.position;
 
-		if(toPlayer.magnitude > 2)
+		if(toPlayer.magnitude > 3)
 		{
-			float speed = toPlayer.magnitude * 3f;
-			_body.AddForce(toPlayer.normalized * speed);
+			_body.AddForce(toPlayer.normalized * 5);
 		}
-		else 
+		else
 		{
-			if(_currentTarget == null)
-			{
-				_body.velocity /= 1.15f;
-			}
+			_canTargetEnemy = true;
+			_body.velocity /= 1.25f;
 		}
 	}
 
@@ -103,12 +104,13 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 			{
 				_currentTarget.isTargeted = false;
 				_currentTarget = null;
+				_canTargetEnemy = false;
 			}
 			else
 			{
-				_body.AddForce(diff * 25f);
-				return;
+				_body.AddForce(diff * 2f);
 			}
+			return;
 		}
 
 		foreach (var villager in Villager.instances)
@@ -120,7 +122,7 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 				{
 					villager.isTargeted = true;
 					_currentTarget = villager;
-					_body.AddForce(diff * 5f);
+					_body.AddForce(diff * 2f);
 					return;
 				}
 			}
@@ -132,8 +134,9 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 		if(collision.gameObject.TryGetComponent(out Villager villager))
 		{
 			_currentTarget = null;
+			_canTargetEnemy = false;
 			villager.Die();
-			FollowPlayer();
+			_body.velocity = Vector2.zero;
 		}
 	}
 

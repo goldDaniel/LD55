@@ -30,7 +30,11 @@ public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 			return;
 		}
 
-		AttractTo(PlayerController.instance.transform.position, 6f);
+		if(!AttractTo(PlayerController.instance.transform.position, 6f))
+		{
+			Vector2 dir = PlayerController.instance.transform.position - transform.position;
+			_body.velocity = dir.normalized * 0.25f;
+		}
 
 		var force = Random.insideUnitCircle * Random.Range(0.5f, 1.5f);
 		_body.AddForce(force);
