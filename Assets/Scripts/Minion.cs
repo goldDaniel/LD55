@@ -58,9 +58,7 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 
 	void FixedUpdate()
 	{
-		Profiler.BeginSample("Separation");
 		_body.AddForce(Separation());
-		Profiler.EndSample();
 
 		if(_currentTarget == null)
 		{
