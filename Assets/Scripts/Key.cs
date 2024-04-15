@@ -26,11 +26,11 @@ public class Key : MonoBehaviour
 	void Start()
 	{
 		worldSpaceUI = GetComponentInChildren<TextMeshPro>();
-		string text = "Required payment: ";
+		string text = "Required payment\n";
 		foreach (var pay in payment)
         {
 			string payName = pay.type.ToString();
-			string payText = $"{payName} {pay.cost} ";
+			string payText = $"{payName} {pay.cost} \n";
 			text += payText;
         }
 

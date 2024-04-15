@@ -17,6 +17,7 @@ public class Collectable : RegisteredEnabledBehaviour<Collectable>
 	void Start()
 	{
 		_body = GetComponent<Rigidbody2D>();
+		_body.angularVelocity = Random.Range(-360f, 360f);
 		PlaySpawnSound();
 	}
 

@@ -29,11 +29,11 @@ public class Lightning : MonoBehaviour
         while (_lineRenderer.startColor.a > 0 || _lineRenderer.endColor.a > 0)
         {
             Color c = _lineRenderer.startColor;
-            c.a -= Time.deltaTime;
+            c.a -= Time.deltaTime * 3;
             _lineRenderer.startColor = c;
 
             c = _lineRenderer.endColor;
-            c.a -= Time.deltaTime;
+            c.a -= Time.deltaTime * 3;
             _lineRenderer.endColor = c;
 
             yield return null;
