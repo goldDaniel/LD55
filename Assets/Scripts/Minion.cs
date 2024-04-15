@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Profiling;
@@ -20,8 +21,20 @@ public class Minion : RegisteredEnabledBehaviour<Minion>
 		_body = GetComponent<Rigidbody2D>();
 		_player = PlayerController.instance.gameObject;
 		_sr = GetComponent<SpriteRenderer>();
+		CreateLightning();
 		PlaySpawnSound();
 	}
+
+	void CreateLightning()
+    {
+		Vector2 offset = new Vector2(Random.Range(0f, 5f), 10);
+		Vector2 end = transform.position;
+		Vector2 start = end + offset;
+		int nodeCount = 80;
+		float branchProbability = 0.8f;
+		Vector2 variance = new Vector2(2f, 1f);
+		LightningRenderer.instance.CreateLightning(start, end, nodeCount, branchProbability, variance);
+    }
 
 	void Update()
 	{

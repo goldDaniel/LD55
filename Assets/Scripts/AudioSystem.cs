@@ -9,7 +9,6 @@ public class AudioSystem : MonoSingleton<AudioSystem>
 	private AudioSource _audioSource;
 	public AudioSource audioSource => _audioSource;
 
-
 	private AudioSource _introAudioSource;
 	private AudioSource _loopAudioSource;
 
