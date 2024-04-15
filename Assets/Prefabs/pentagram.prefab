@@ -308,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 0}
   payment: []
+  ritualClip: {fileID: 8300000, guid: 28a9f8eb05ddb3f4697c07928a5db69a, type: 3}
 --- !u!1 &6679063421463820535
 GameObject:
   m_ObjectHideFlags: 0

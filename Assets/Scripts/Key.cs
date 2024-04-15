@@ -21,6 +21,9 @@ public class Key : MonoBehaviour
 	[SerializeField]
 	Payment[] payment;
 
+	[SerializeField]
+	AudioClip ritualClip;
+
 	private bool paid = false;
 
 	private bool canUnlock = false;
@@ -44,20 +47,21 @@ public class Key : MonoBehaviour
 
 	void Update()
 	{
-		if(canUnlock && !paid)
+		pressToUnlock.gameObject.SetActive(false);
+		if (canUnlock && !paid)
 		{
-			pressToUnlock.gameObject.SetActive(true);
-
-			if(Input.GetKeyDown(KeyCode.Space))
+			bool costReached = true;
+			foreach (var pay in payment)
 			{
-				bool costReached = true;
-				foreach (var pay in payment)
-				{
-					costReached &= PlayerInventory.instance.HasEnough(pay.type, pay.cost);
-				}
+				costReached &= PlayerInventory.instance.HasEnough(pay.type, pay.cost);
+			}
 
-				if (costReached)
+			if (costReached)
+			{
+				pressToUnlock.gameObject.SetActive(true);
+				if (Input.GetKeyDown(KeyCode.Space))
 				{
+					AudioSystem.instance.audioSource.PlayOneShot(ritualClip, 0.5f);
 					door.Unlock();
 					foreach (var pay in payment)
 					{
@@ -68,10 +72,6 @@ public class Key : MonoBehaviour
 					worldSpaceCost.text = "Ritual Completed";
 				}
 			}
-		}
-		else
-		{
-			pressToUnlock.gameObject.SetActive(false);
 		}
 	}
 

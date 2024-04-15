@@ -8,6 +8,9 @@ public class PlayerInventory : MonoSingleton<PlayerInventory>
 	[SerializeField]
 	private SerializableDictionary<CollectableType, TextMeshProUGUI> _textArea;
 
+	[SerializeField]
+	private TextMeshProUGUI minionCost;
+
 	public Dictionary<CollectableType, int> inventory = new()
 	{
 		{CollectableType.Blood, 10 },
@@ -24,6 +27,8 @@ public class PlayerInventory : MonoSingleton<PlayerInventory>
 			string desc = text.Substring(0, text.IndexOf(" "));
 			_textArea.dictionary[key].text = $"{desc} {inventory[key]}";
 		}
+
+		minionCost.text = $"Minion Cost: {PlayerController.instance.MinionCost} Blood";
 	}
 
 	public bool HasEnough(CollectableType type, int goal)

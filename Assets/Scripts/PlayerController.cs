@@ -9,6 +9,8 @@ public class PlayerController : MonoSingleton<PlayerController>
 	[SerializeField, Range(1, 100)]
 	private int _minionCost;
 
+	public int MinionCost => _minionCost;
+
 	[SerializeField]
 	Minion minionPrefab;
 
@@ -53,6 +55,7 @@ public class PlayerController : MonoSingleton<PlayerController>
 
 	void SpawnMinion()
 	{
+		_minionCost++;
 		var spawnPos = new Vector2(this.transform.position.x, this.transform.position.y) + Random.insideUnitCircle * Random.Range(1.5f, 2.5f);
 		Instantiate(minionPrefab, spawnPos, Quaternion.identity);
 	}
