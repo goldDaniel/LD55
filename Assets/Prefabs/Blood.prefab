@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 8779246306083695985}
   - component: {fileID: 8033485046785699932}
   - component: {fileID: 450967350526875089}
-  - component: {fileID: 6086200154635788139}
   - component: {fileID: 952909353008048238}
-  - component: {fileID: 554258438291712524}
+  - component: {fileID: -616598092861064845}
   m_Layer: 0
   m_Name: Blood
   m_TagString: Untagged
@@ -123,24 +122,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6086200154635788139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4832977510849905247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5060e1f4adf0ae4daa82eb6758f5886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickEffects:
-  - {fileID: 8300000, guid: da0ec1be7f409ed43a629da14c2f409e, type: 3}
-  - {fileID: 8300000, guid: 5314e66146701704297887096f9dbc73, type: 3}
-  - {fileID: 8300000, guid: 265df5b534a88864890d24928c2071cd, type: 3}
-  - {fileID: 8300000, guid: 3b5f856f82f48724c98bd497aa9c6e86, type: 3}
-  - {fileID: 8300000, guid: 1c7942623220547448d9ccc3ce00eac9, type: 3}
 --- !u!50 &952909353008048238
 Rigidbody2D:
   serializedVersion: 4
@@ -168,99 +149,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!82 &554258438291712524
-AudioSource:
+--- !u!114 &-616598092861064845
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4832977510849905247}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5060e1f4adf0ae4daa82eb6758f5886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pickEffects:
+  - {fileID: 8300000, guid: da0ec1be7f409ed43a629da14c2f409e, type: 3}
+  - {fileID: 8300000, guid: 5314e66146701704297887096f9dbc73, type: 3}
+  - {fileID: 8300000, guid: 265df5b534a88864890d24928c2071cd, type: 3}
+  - {fileID: 8300000, guid: 3b5f856f82f48724c98bd497aa9c6e86, type: 3}
+  - {fileID: 8300000, guid: 1c7942623220547448d9ccc3ce00eac9, type: 3}
+  _spawnEffects:
+  - {fileID: 8300000, guid: 751af8f6d67076a43bcce552d74737f9, type: 3}
+  - {fileID: 8300000, guid: e640f0b18cc963045b5f39f2a0cf4d6b, type: 3}
+  - {fileID: 8300000, guid: 752c2176b5bfb1f42b20334702c6096d, type: 3}

@@ -262,8 +262,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f45ef426478bdf4e9bb21d04f1508c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textArea: {fileID: 0}
-  bloodCount: 0
+  _textArea:
+    _serialDict:
+      dictItems:
+      - key: 0
+        value: {fileID: 0}
+      - key: 1
+        value: {fileID: 0}
 --- !u!58 &-6091820955576190945
 CircleCollider2D:
   m_ObjectHideFlags: 0

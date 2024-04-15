@@ -1,9 +1,14 @@
+using Assets.Scripts;
+using TMPro;
 using UnityEngine;
 
-public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
+public class Collectable : RegisteredEnabledBehaviour<Collectable>
 {
 	[SerializeField]
-	private AudioClip[] pickEffects;
+	private AudioClip[] _pickEffects, _spawnEffects;
+
+	[SerializeField]
+	private CollectableType _type;
 
 	private Rigidbody2D _body;
 
@@ -12,6 +17,7 @@ public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 	void Start()
 	{
 		_body = GetComponent<Rigidbody2D>();
+		PlaySpawnSound();
 	}
 
 	void Update()
@@ -63,21 +69,38 @@ public class BloodDroplet : RegisteredEnabledBehaviour<BloodDroplet>
 
 		if (other.CompareTag("Player"))
 		{
-			PlayerInventory.instance.bloodCount++;
+			PlayerInventory.instance.inventory[_type]++;
 			PlayPickupSound();
 			Destroy(this.gameObject);
 		}
 	}
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+		OnTriggerEnter2D(other);
+    }
+
+    void PlaySpawnSound()
+    {
+		if (_spawnEffects.Length == 0) return;
+
+		int index = Random.Range(0, _spawnEffects.Length);
+		float volume = 0.5f;
+
+		AudioSystem.instance.audioSource.PlayOneShot(_spawnEffects[index], volume);
+	}
+
 	void PlayPickupSound()
 	{
-		int index = Random.Range(0, pickEffects.Length);
+		if (_pickEffects.Length == 0) return;
+
+		int index = Random.Range(0, _pickEffects.Length);
 		float volume = 0.5f;
 		if(index == 4)
 		{
 			volume = 0.2f;
 		}
 
-		AudioSystem.instance.audioSource.PlayOneShot(pickEffects[index], volume);
+		AudioSystem.instance.audioSource.PlayOneShot(_pickEffects[index], volume);
 	}
 }

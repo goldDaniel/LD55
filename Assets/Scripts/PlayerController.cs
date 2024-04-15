@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 
 public class PlayerController : MonoSingleton<PlayerController>
@@ -35,9 +36,9 @@ public class PlayerController : MonoSingleton<PlayerController>
 
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
-			if (PlayerInventory.instance.bloodCount >= _minionCost)
+			if (PlayerInventory.instance.inventory[CollectableType.Blood] >= _minionCost)
 			{
-				PlayerInventory.instance.bloodCount -= _minionCost;
+				PlayerInventory.instance.inventory[CollectableType.Blood] -= _minionCost;
 				SpawnMinion();
 			}
 		}

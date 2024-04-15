@@ -14,7 +14,20 @@ public class SpawnZone : MonoBehaviour
 
 	float _spawnTime;
 
-	private Vector2 spawnBounds => new Vector2(width * transform.parent.localScale.x, height * transform.parent.localScale.y);
+	private Vector2 spawnBounds
+	{
+		get
+		{
+			Vector2 result = new Vector2(width, height);
+
+			if (transform.parent != null)
+			{
+				result *= transform.parent.localScale;
+			}
+
+			return result;
+		}
+	}
 
 	void Start()
 	{
