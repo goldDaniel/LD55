@@ -12,6 +12,9 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 	private GameObject _blood;
 
 	[SerializeField]
+	private GameObject _flesh;
+
+	[SerializeField]
 	private AudioClip[] _deathSounds;
 
 	[System.NonSerialized]
@@ -28,7 +31,8 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 	public void Die()
 	{
 		isTargeted = false;
-		SpawnBloodParticles();
+		Spawn(_blood, Random.Range(4, 10), 1);
+		Spawn(_flesh, 1, 0.2f);
 		PlayDeathSound();
 		for (int i = 0; i < _deathTexturePrefabs.Length; i++)
 		{
@@ -38,16 +42,16 @@ public class Villager : RegisteredEnabledBehaviour<Villager>
 		Destroy(gameObject);
 	}
 
-	void SpawnBloodParticles()
-	{
-		int bloodDroplet = UnityEngine.Random.Range(4, 10);
+	void Spawn(GameObject prefab, int amount, float probbability)
+    {
+		if (Random.value > probbability) return;
 
-		for (int i = 0; i < bloodDroplet; ++i)
-		{
-			GameObject obj = Instantiate(_blood, transform.position, Quaternion.identity);
-			obj.GetComponent<Rigidbody2D>().velocity = Random.insideUnitSphere * Random.Range(5, 12);
-		}
-	}
+		for(int i = 0; i < amount; ++i)
+        {
+			GameObject obj = Instantiate(prefab, transform.position, Quaternion.identity);
+			obj.GetComponent<Rigidbody2D>().velocity = Random.insideUnitCircle * Random.Range(5, 12);
+        }
+    }
 
 	void PlayDeathSound()
     {
