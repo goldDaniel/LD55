@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-	public void Unlock()
+	public virtual void Unlock()
 	{
 		Destroy(this.gameObject);
 	}

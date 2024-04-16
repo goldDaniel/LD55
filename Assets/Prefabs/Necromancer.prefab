@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ba68531b21f6b4fa35efa3bf1227c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: 10
   _minionCost: 5
   minionPrefab: {fileID: 4922852699259716093, guid: 7cb726c1b666df64d8ac8eef9bd880c2, type: 3}
 --- !u!114 &5062471957140868025
@@ -271,6 +271,7 @@ MonoBehaviour:
         value: {fileID: 0}
       - key: 2
         value: {fileID: 0}
+  minionCost: {fileID: 0}
 --- !u!58 &-6091820955576190945
 CircleCollider2D:
   m_ObjectHideFlags: 0

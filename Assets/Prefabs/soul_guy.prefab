@@ -110,16 +110,16 @@ MonoBehaviour:
       dictItems:
       - key: {fileID: 4832977510849905247, guid: 41b509eba946a6046b6619085af4add3, type: 3}
         value:
-          amountRange: {x: 40, y: 50}
+          amountRange: {x: 5, y: 10}
           probability: 1
       - key: {fileID: 3955105882136951170, guid: 7274d4ef8ef5eb142ac034307306753a, type: 3}
         value:
-          amountRange: {x: 20, y: 30}
-          probability: 1
+          amountRange: {x: 5, y: 15}
+          probability: 0.9
       - key: {fileID: 6423111271052209182, guid: 5ef0ba7973f9dbd4bb616fcd84e94f52, type: 3}
         value:
           amountRange: {x: 10, y: 15}
-          probability: 1
+          probability: 0.8
   _deathSounds:
   - {fileID: 8300000, guid: 6118a3c41ea61b8408ac6652bf888a18, type: 3}
   - {fileID: 8300000, guid: 94a44701218cde84da338579e6f5bb2b, type: 3}

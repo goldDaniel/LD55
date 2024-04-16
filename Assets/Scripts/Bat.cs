@@ -23,19 +23,35 @@ public class Bat : MonoBehaviour
 
 	void Update()
     {
-		FollowPlayer();
+		
 		SpawnHearts();
 
 		passedTime += Time.deltaTime;
     }
 
+	void FixedUpdate()
+	{
+		FollowPlayer();
+
+		_body.velocity = Vector2.ClampMagnitude(_body.velocity, 12f);
+	}
+
 	void FollowPlayer()
 	{
+		
 		Vector2 toPlayer = _player.transform.position - this.transform.position;
 
+
+		if(toPlayer.magnitude > 5)
+		{
+			Vector2 playerPos = _player.transform.position;
+			_body.position = playerPos - toPlayer.normalized * 5;
+		}
+		
+		
 		if (toPlayer.magnitude > 3)
 		{
-			_body.AddForce(toPlayer.normalized * 1.5f);
+			_body.AddForce(toPlayer.normalized * 5f);
 		}
 		else
 		{

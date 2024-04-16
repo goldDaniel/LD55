@@ -40,10 +40,13 @@ public class SpawnZone : MonoBehaviour
 		_spawnTime -= Time.deltaTime;
 		if(_spawnTime <= 0)
 		{
-			Vector2 pos = new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle * spawnBounds;
-			var go = Instantiate(toSpawn, pos, Quaternion.identity);
+			if(Villager.instances.Count < 200)
+			{
+				Vector2 pos = new Vector2(transform.position.x, transform.position.y) + Random.insideUnitCircle * spawnBounds;
+				var go = Instantiate(toSpawn, pos, Quaternion.identity);
 
-			go.GetComponentInChildren<Rigidbody2D>().velocity = Random.insideUnitCircle * 5f;
+				go.GetComponentInChildren<Rigidbody2D>().velocity = Random.insideUnitCircle * 5f;
+			}
 
 			_spawnTime = spawnTimer;
 		}

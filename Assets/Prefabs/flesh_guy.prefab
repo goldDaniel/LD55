@@ -114,8 +114,8 @@ MonoBehaviour:
           probability: 1
       - key: {fileID: 3955105882136951170, guid: 7274d4ef8ef5eb142ac034307306753a, type: 3}
         value:
-          amountRange: {x: 1, y: 2}
-          probability: 0.9
+          amountRange: {x: 3, y: 5}
+          probability: 0.95
   _deathSounds:
   - {fileID: 8300000, guid: 6118a3c41ea61b8408ac6652bf888a18, type: 3}
   - {fileID: 8300000, guid: 94a44701218cde84da338579e6f5bb2b, type: 3}
